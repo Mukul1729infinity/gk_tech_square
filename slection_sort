@@ -1,0 +1,12 @@
+def selectionsort(arr):
+    n=len(arr)
+    for i in range(n):
+        small=i
+        for j in range(i+1,n):
+            if arr[j]<arr[small]:
+                small=j
+        if small!=i:
+            arr[i],arr[small]=arr[small],arr[i]
+    return arr
+arr=[1223,2,345,3,456,21,34562,22,12345,1,-1,-23560]
+selectionsort(arr)
