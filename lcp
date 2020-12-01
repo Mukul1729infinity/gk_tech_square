@@ -1,0 +1,50 @@
+  def letterCasePermutation(self, S):
+        
+        # concept - We can solve this using recursion - If the char we are at
+        # is alphabet, we have to choices - that is take it as upper and lower
+        # but if the char is number then only choice is to take it as is.
+        
+        res = []
+        
+        out = ''
+        
+        self.solve(S, out, res)
+        
+        return res
+    
+    def solve(self, inp, out, res):
+        # We are going to reduce input every time till it becomes empty
+        # and at that instance we are going to append it into our result
+        if len(inp) == 0:
+            res.append(out)
+            return 
+        
+        # Case-1 --> When the character us alphabet which means that we are going 
+        # to have a couple of choices, either take this as lower char or we can take 
+        # it as upper char. Both will result in 2 different outputs
+        if inp[0].isalpha():
+            op1 = out
+            op2 = out
+            # We initialize both resulting outputs
+            op1 += inp[0].lower()
+            op2 += inp[0].upper()
+            
+            # During recursion we keep reducing the input
+            tempInp = inp[1:]
+            
+            # Recursive calls for both the brances of recursive tree,
+            # one where we made lower case char choice, other choice was to take
+            # upper case char
+            self.solve(tempInp, op1, res)
+            self.solve(tempInp, op2, res)
+        
+        else:
+            # We are here because the char over here is number, so in this case
+            # only choice we have is to take it as it is, so do that.
+            op1 = out
+            op1 += inp[0]
+            
+            # Reduce input as mentioned above
+            tempInp = inp[1:]
+            # Recursive call for this branch
+            self.solve(tempInp, op1, res)
