@@ -1,0 +1,25 @@
+Perform BFS using a queue/nextQueue structure.
+
+Keep track of the parent of whichever value you find first.
+If you find the secondParent, return firstParent != secondParent.
+
+If you reach the end off the current depth, only finding one parent, then return False.
+
+class Solution(object):
+    def isCousins(self, root, x, y):
+        firstParent = None
+        queue = [root]
+        while queue:
+            nextQueue = []
+            for node in queue:
+                for nextNode in (node.left, node.right):
+                    if nextNode:
+                        if nextNode.val in (x, y):
+                            if not firstParent:
+                                firstParent = node
+                            else:
+                                return firstParent != node
+                        nextQueue.append(nextNode)
+            if firstParent:
+                return False
+            queue = nextQueue
